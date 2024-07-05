@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 const java = "/svgs/tools/java.svg";
 const rust = "/svgs/tools/rust.svg";
 const opengl = "/svgs/tools/opengl.svg";
@@ -18,35 +18,49 @@ const csharp = "/svgs/tools/csharp.svg";
 const mysql = "/svgs/tools/mysql.svg";
 
 const Project = ({ title, description, about, screenshots, widget, tools, wip }) => {
+    const cardRef = useRef(null);
+    const descriptionRef = useRef(null);
+
+    const toggleHover = (expand) => {
+        if (expand) {
+            cardRef.current.style.transform = 'scale(1.1)';
+            cardRef.current.style.zIndex = '10';
+            cardRef.current.style.position = 'relative';
+            cardRef.current.parentNode.style.position = 'relative';
+            const fullHeight = descriptionRef.current.scrollHeight;
+            descriptionRef.current.style.maxHeight = fullHeight + 'px';
+        } else {
+            cardRef.current.style.transform = 'none';
+            cardRef.current.style.zIndex = '1';
+            descriptionRef.current.style.maxHeight = '0';
+        }
+    };
+
     return (
-        <div className="bg-light overflow-hidden shadow-lg m-10 p-10 pt-10 w-96 h-96 items-center justify-center relative"
-             style={{ width: '40vw', height: '40vw', 'boxShadow': '20px 20px #758694'}}>
-            <div className="flex justify-between">
+        <div ref={cardRef} className="bg-light shadow-lg m-10 p-10 transition-all duration-500 ease-in-out flex-none"
+             style={{
+                 width: '30vw',
+                 boxShadow: '20px 20px #758694',
+                 overflow: 'hidden',
+                 transition: 'transform 0.5s ease',
+                 gridArea: 'auto'
+             }}
+             onMouseEnter={() => toggleHover(true)}
+             onMouseLeave={() => toggleHover(false)}>
+            <h2 className="text-center text-2xl font-bold mb-2 break-words">{title}</h2>
+            <div className="flex justify-center gap-2 mb-2">
                 {tools?.map((tool, index) => (
-                    <div className="rounded-full overflow-hidden shadow-lg w-20 h-20 flex flex-col items-center justify-center bg-white">
-                        <img key={index} src={tool} className="w-6 h-6" style={{ width: '48px', height: '48px' }}/>
-                    </div>
+                    <img key={index} src={tool} alt="tool" className="w-8 h-8 rounded-full overflow-hidden shadow-lg bg-white" />
                 ))}
             </div>
-            <div className="content-start pt-10">
-                <h2 className="font-bold text-xl mb-2 break-words">
-                    {title}
-                </h2> 
-                {wip && <p className="text-gray-400 text-lg"> &#x26A0; Work in Progress &#x26A0; </p>}
-                {/* <div>
-                    {screenshots?.map((screenshot, index) => (
-                        <img key={index} src={screenshot} className="w-full" />
-                    ))}
-                </div> */}
-                <div>
-                    {widget}
-                </div>
-                <p className="text-gray-700 text-base">{about}</p>
-                <p className="text-gray-900 text-lg">{description}</p>
-            </div>
+            {wip && <p className="text-center text-lg">&#x26A0; Work in Progress &#x26A0;</p>}
+            {screenshots && screenshots.length > 0 && <img src={screenshots[0]} alt="Project screenshot" className="w-full mb-2"/>}
+            <p className="text-center text-base mb-2">{about}</p>
+            <div ref={descriptionRef} style={{maxHeight: '0', overflow: 'hidden', transition: 'max-height 0.5s ease-in-out'}}>{description}</div>
+            <div>{widget}</div>
         </div>
     );
-}
+};
 
 
 const Projects = () => {
@@ -70,7 +84,8 @@ const Projects = () => {
             description: "",
             screenshots: [],
             tools: [
-                java
+                java,
+                maven
             ]
         },
         {   title: "The Watering Hole",
@@ -175,7 +190,7 @@ const Projects = () => {
             <header className="bg-dark bg-dark p-4 shadow-lg"/>
             <h1 className="text-6xl font-bold p-10 text-light flex justify-center"
           style={{'textShadow': '5px 5px #758694', id: 'software-dev'}}>Software Dev</h1>
-            <div className="flex flex-wrap justify-center">
+            <div className="flex flex-wrap items-start justify-center gap-20">
                 {[].concat(softwareDev, gameDev, archive).map((project, index) => (
                 <Project class=""
                     key={index} 
