@@ -2,9 +2,12 @@ import React, { useRef } from 'react';
 import './App.css';
 
 function App() {
-  const softwareDevRef = useRef(null);
-
-  const scrollToRef = () => softwareDevRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToRef = () => {
+    const element = document.getElementById('software-dev');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="App flex flex-col justify-between h-screen bg-dark text-light">

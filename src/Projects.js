@@ -20,7 +20,7 @@ const mysql = "/svgs/tools/mysql.svg";
 const Project = ({ title, description, about, screenshots, widget, tools, githubUrl}) => {
     const [isHovered, setIsHovered] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const totalContent = screenshots ? (widget ? [widget, ...screenshots] : screenshots) : [widget] || []; // this is rough
+    const totalContent = widget ? [widget] : screenshots;
     const cardRef = useRef(null);
     const descriptionRef = useRef(null);
     
@@ -53,13 +53,12 @@ const Project = ({ title, description, about, screenshots, widget, tools, github
     };
 
     return (
-        <div ref = {cardRef} className="bg-light shadow-lg m-10 p-10 transition-all duration-500 ease-in-out flex-none"
+        <div ref = {cardRef} className="bg-light rounded-xl shadow-lg m-10 p-10"
              style={{
-                 width: '30vw',
+                 width: '35vw',
                  boxShadow: '20px 20px #758694',
-                 overflow: 'hidden',
                  transition: 'transform 0.5s ease',
-                 gridArea: 'auto'
+                 gridArea: 'auto',
              }}
              onMouseEnter={() => toggleHover(true)}
              onMouseLeave={() => toggleHover(false)}>
@@ -75,21 +74,28 @@ const Project = ({ title, description, about, screenshots, widget, tools, github
                     <img key={index} src={tool} alt={`${tool} icon`} className="w-8 h-8 rounded-full overflow-hidden drop-shadow-lg bg-light" />
                 ))}
             </div>
-            <p className="text-center text-base mb-2">{about}</p>
-            <div ref={descriptionRef} style={{ maxHeight: '0', overflow: 'hidden', transition: 'max-height 0.4s ease-in-out' }}>{description}</div>
-            <div className={`relative w-full ${totalContent.length > 1 ? 'h-64' : 'h-max'}`}>
-                {typeof totalContent[currentIndex] === 'string' ? (
-                    <img src={totalContent[currentIndex]} alt="Project screenshot" className="object-contain h-full w-full" />
-                ) : (
-                    <div className="flex justify-center items-center">{totalContent[currentIndex]}</div>
-                )}
-                {totalContent.length > 1 && (
-                    <div style={{transition: 'opacity 0.5s ease-in-out', opacity: isHovered ? 1 : 0}}>
-                        <button onClick={() => handleNavigation(-1)} className="text-dark absolute left-[-20px] top-1/2 transform -translate-y-1/2">◀</button>
-                        <button onClick={() => handleNavigation(1)} className="text-dark absolute right-[-20px] top-1/2 transform -translate-y-1/2">▶</button>
-                    </div>
-                )}
+            <p className="text-dark text-center text-base mb-2 font-bold">{about}</p>
+            <div ref={descriptionRef} style={{ maxHeight: '0', overflow: 'hidden', transition: 'max-height 0.5s ease-in-out' }}>
+                <div className="p-5 rounded-xl" style={{'box-shadow': 'inset 0 4px 6px -1px rgb(0 0 0 / 0.1)'}}>
+                {description}
+                </div>
             </div>
+            {screenshots && (
+                <div className="relative w-full h-64 shadow-xl rounded-xl flex justify-center items-center">
+                    <img src={totalContent[currentIndex]} alt="Project screenshot" className="shadow-xl object-cover h-64 w-full rounded-xl" />
+                    {totalContent.length > 1 && (
+                        <div style={{transition: 'opacity 0.5s ease-in-out', opacity: isHovered ? 1 : 0}}>
+                            <button onClick={() => handleNavigation(-1)} className="text-dark absolute left-[-20px] top-1/2 transform -translate-y-1/2">◀</button>
+                            <button onClick={() => handleNavigation(1)} className="text-dark absolute right-[-20px] top-1/2 transform -translate-y-1/2">▶</button>
+                        </div>
+                    )}
+                </div>
+            )}
+            {widget && (
+                <div className="flex justify-center items-center">
+                    {totalContent[0]}
+                </div>
+            )}
         </div>
     );
 };
@@ -133,7 +139,7 @@ const Projects = () => {
                 flask,
                 mysql
             ],
-            widget: <iframe src="https://drive.google.com/file/d/1cukv0qmRoNZ2XMyCB1G1QqzbzaIx5Nht/preview"></iframe>,
+            widget: <div className="rounded-xl shadow-xl"><iframe className="rounded-xl shadow-xl" src="https://drive.google.com/file/d/1cukv0qmRoNZ2XMyCB1G1QqzbzaIx5Nht/preview"></iframe></div>,
             githubUrl: "https://github.com/christianbookout/the-watering-hole"
         },
         {   title: "Can't See Chess",
@@ -165,7 +171,7 @@ const Projects = () => {
         {   title: "Banana Slip",
             about: "A 3D platformer game with a hint of nostalgia, developed using Godot 4.", 
             description: "My most recent game jam, Banana Slip, is my personal favourite game development project. This was my first in-person jam, and lasted two days. Working in a team of five, I learned the level of quality and polish that can be achieved by working with amazing people in such a short time frame. We created a full three-level game with timed progression and a working, hosted leaderboard. This project is ongoing development, with plans to release on Steam.",
-            widget: <iframe frameBorder="0" src="https://itch.io/embed/2499721" width="208" height="167"><a href="https://christianbookout.itch.io/banana-slip">Banana Slip by christianbookout, Sikowny</a></iframe>,
+            widget: <iframe  className="rounded-xl shadow-xl" src="https://itch.io/embed/2499721" width="208" height="167"><a href="https://christianbookout.itch.io/banana-slip">Banana Slip by christianbookout, Sikowny</a></iframe>,
             tools: [
                 godot,
                 blender,
@@ -176,7 +182,7 @@ const Projects = () => {
         {   title: "Slay Bells Ring",
             about: "A 3D atmospheric horror game about repairing Santa's sleigh. ",
             description: "Slay Bells Ring was my first experience with game development in a professional team, with specific roles and expectations. The result was my first fully completed game. Taking place over Christmas break, this game jam lasted a week. I learned a lot about the development of fun-yet-challenging AI, as well as the importance of audio and visual design.",
-            widget: <iframe frameBorder="0" src="https://itch.io/embed/2432661" width="208" height="167"><a href="https://christianbookout.itch.io/slay-bells-ring">Slay Bells Ring by christianbookout, DisguisedGrandpa, Kibblez, Frigid</a></iframe>,
+            widget: <iframe className="rounded-xl shadow-xl" src="https://itch.io/embed/2432661" width="208" height="167"><a href="https://christianbookout.itch.io/slay-bells-ring">Slay Bells Ring by christianbookout, DisguisedGrandpa, Kibblez, Frigid</a></iframe>,
             tools: [
                 unity,
                 csharp
@@ -186,7 +192,7 @@ const Projects = () => {
         {   title: "Solitoad",
             about: "An ambient 2D game about a frog using insects for entertainment.",
             description: "As a solo project and my first game jam, Solitoad was a fantastic experience which helped me fall in love with game development. I learned the crunch of game jams, and the necessity for rapid prototyping and iteration.",
-            widget: <iframe frameBorder="0" src="https://itch.io/embed/2113985" width="208" height="167"><a href="https://christianbookout.itch.io/solitoad">Solitoad by christianbookout</a></iframe>,
+            widget: <iframe className="rounded-xl shadow-xl" src="https://itch.io/embed/2113985?border_width=0" width="208" height="167"><a href="https://christianbookout.itch.io/solitoad">Solitoad by christianbookout</a></iframe>,
             tools: [
                 unity,
                 csharp,
@@ -197,7 +203,7 @@ const Projects = () => {
         {   title: "Dungeon Detox",
             about: "A 2D/3D hybrid game about keeping your dungeon clean.",
             description: "",
-            widget: <iframe frameBorder="0" src="https://itch.io/embed/2247847" width="208" height="167"><a href="https://christianbookout.itch.io/dungeon-detox">Dungeon Detox by christianbookout, DisguisedGrandpa</a></iframe>,
+            widget: <iframe className="rounded-xl shadow-xl" src="https://itch.io/embed/2247847" width="208" height="167"><a href="https://christianbookout.itch.io/dungeon-detox">Dungeon Detox by christianbookout, DisguisedGrandpa</a></iframe>,
             tools: [
                 unity,
                 csharp,
@@ -208,7 +214,7 @@ const Projects = () => {
         {   title: "Corn Gobblin",
             about: "A 2D platformer game about a goblin fighting squirrels for corn.",
             description: "As an introduction to Godot, 2D animation, and audio design, Corn Gobblin was an excellent learning experience. I worked in a team of five for a three-day game jam, most of which I spent scribbling down character designs and animations. I worked as a mentor for the team, as all of the other members but one were completely new to game development.",
-            widget: <iframe frameBorder="0" src="https://itch.io/embed/2459577" width="208" height="167"><a href="https://christianbookout.itch.io/corn-gobblin">Corn Gobblin by christianbookout, goolent`, intrnlerr, Clial</a></iframe>,
+            widget: <iframe className="rounded-xl shadow-xl" src="https://itch.io/embed/2459577" width="208" height="167"><a href="https://christianbookout.itch.io/corn-gobblin">Corn Gobblin by christianbookout, goolent`, intrnlerr, Clial</a></iframe>,
             tools: [
                 godot,
                 procreate,
@@ -220,17 +226,17 @@ const Projects = () => {
     return (
         <div className="bg-dark">
             <header className="bg-dark bg-dark p-4 shadow-lg"/>
-            <h1 className="text-6xl font-bold p-10 text-light flex justify-center"
-            style={{'textShadow': '5px 5px #758694', id: 'software-dev'}}>Software Dev</h1>
+            <h1 className="text-6xl font-bold pt-20 text-light flex justify-center"
+            style={{'textShadow': '5px 5px #758694'}} id="software-dev">Software Dev</h1>
             <div className="flex justify-around p-10" style={{ maxWidth: '100vw' }}>
-                <Column projects={softwareDev.filter((_, index) => index % 2 == 0)} />
-                <Column projects={softwareDev.filter((_, index) => index % 2 == 1)} />
+                <Column projects={softwareDev.filter((_, index) => index % 2 === 0)} />
+                <Column projects={softwareDev.filter((_, index) => index % 2 === 1)} />
             </div>
-            <h1 className="text-6xl font-bold p-10 text-light flex justify-center"
+            <h1 className="text-6xl font-bold pt-20 text-light flex justify-center"
                 style={{'textShadow': '5px 5px #758694', id: 'software-dev'}}>Game Dev</h1>
             <div className="flex justify-around p-10" style={{ maxWidth: '100vw' }}>
-                    <Column projects={gameDev.filter((_, index) => index % 2 == 0)} />
-                    <Column projects={gameDev.filter((_, index) => index % 2 == 1)} />
+                    <Column projects={gameDev.filter((_, index) => index % 2 === 0)} />
+                    <Column projects={gameDev.filter((_, index) => index % 2 === 1)} />
             </div>
         </div>
     );
