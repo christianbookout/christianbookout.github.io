@@ -12,14 +12,14 @@ function App() {
       <h1 className="text-6xl font-bold p-10" style={{ textShadow: '5px 5px #758694' }}>
         Christian Bookout
       </h1>
-      <p className="text-beige p-5">
+      <p className="text-light p-5">
         I'm a software engineer with a passion for meaningful innovation.
       </p>
       <div className="flex flex-row items-center justify-center">
-        <a href="https://github.com/christianbookout">
+        <a href="https://github.com/christianbookout" target="_blank">
           <img src={"/svgs/github.svg"} alt="GitHub" className="inline-block w-6 h-6 mx-2 text-light" />
         </a>
-        <a href="https://www.linkedin.com/in/christian-bookout/">
+        <a href="https://www.linkedin.com/in/christian-bookout/" target="_blank">
           <img src={"/svgs/linkedin.svg"} alt="LinkedIn" className="inline-block w-6 h-6 mx-2" />
         </a>
         <a href="mailto:christianmbookout@gmail.com">
