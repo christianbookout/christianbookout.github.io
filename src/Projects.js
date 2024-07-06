@@ -60,7 +60,10 @@ const Project = ({ title, description, about, screenshots, widget, tools, github
                  gridArea: 'auto',
              }}
              onMouseEnter={() => toggleHover(true)}
-             onMouseLeave={() => toggleHover(false)}>
+             onMouseLeave={() => toggleHover(false)}
+             onFocus={() => toggleHover(true)}
+             onBlur={() => toggleHover(false)}
+             tabIndex="0">
             {githubUrl && (
                 <a href={githubUrl} target="_blank" className="absolute right-2 top-2" 
                    style={{transition: 'opacity 0.5s ease-in-out', opacity: isHovered ? 1 : 0}}>
@@ -81,7 +84,7 @@ const Project = ({ title, description, about, screenshots, widget, tools, github
             </div>
             {screenshots && (
                 <div className="relative w-full h-64 shadow-xl rounded-xl flex justify-center items-center">
-                    <img src={totalContent[currentIndex]} alt="Project screenshot" className="shadow-xl object-cover h-64 w-full rounded-xl" />
+                    <img src={totalContent[currentIndex].content} alt={totalContent[currentIndex].alt} className="shadow-xl object-cover h-64 w-full rounded-xl" />
                     {totalContent.length > 1 && (
                         <div style={{transition: 'opacity 0.5s ease-in-out', opacity: isHovered ? 1 : 0}}>
                             <button onClick={() => handleNavigation(-1)} className="text-dark absolute left-[-20px] top-1/2 transform -translate-y-1/2">◀</button>
@@ -106,10 +109,22 @@ const Projects = () => {
             about: "A spiderweb simulation with realistic web generation and physical modelling.", 
             description: "As my introduction to Rust, the Spiderweb Simulator was a tough but rewarding project. Built for my final project of CSC 473: Fundamentals of Computer Animation, I plunged face-first into the world of simulation, research papers, and low-level programming. I came out of this experience with a solid understanding of Rust, OpenGL, simulation algorithms, and developing algorithms of my own. The research paper I wrote for this project is available on the GitHub repository.",
             screenshots : [
-                "/screenshots/spiderweb-ui.png",
-                "/screenshots/teaser.png",
-                "/screenshots/wind1.png",
-                "/screenshots/wind2.png"
+                {
+                    content: "/screenshots/spiderweb-ui.png",
+                    alt: "The user interface for the spiderweb simulator, showing a variety of generation settings on the left hand side, a generated web in the center, and information pertaining to the simulation such as amount of webs, simulation time, etc. on the bottom-right side."
+                },
+                {
+                    content: "/screenshots/teaser.png",
+                    alt: "An image of a generated spiderweb after it has been simulated, pushed down by gravity. The web contains many strands, appearing very similar to an actual web. The web has two insects attached to it, represented by green squares."
+                },
+                {
+                    content: "/screenshots/wind1.png",
+                    alt: "A simple spiral web with few strands before simulation."
+                },
+                {
+                    content: "/screenshots/wind2.png",
+                    alt: "The same simple spiral web as the previous screenshot but after being simulated and hit with a strong gust of wind."
+                }
             ],
             tools: [
                 rust,
@@ -124,7 +139,10 @@ const Projects = () => {
                 haskell
             ],
             screenshots: [
-                "/screenshots/glisser.png",
+                {
+                    content: "/screenshots/glisser.png",
+                    alt: "A screenshot of Haskell Glisser code for storing teams, directions, and game objects."
+                },
             ],
             githubUrl: "https://github.com/christianbookout/glisser"
         },
@@ -145,7 +163,10 @@ const Projects = () => {
             about: "A Discord bot for playing blind chess, storing ratings, analyzing games, and visually interacting with finished games.", 
             description: "I've always been fascinated by those who can play chess without seeing a board in front of them. By creating a Discord bot that knows the rules of chess, can visually represent the board post-game, can analyze your game, and can store your rating, I was able to bring the blindfolded chess experience to Discord. Developing this bot improved my desire for creating a clean user experience.",
             screenshots: [
-                "/screenshots/cantseechess1.png",
+                {
+                    content: "/screenshots/cantseechess1.png",
+                    alt: "A Discord embed showing a chess board after moves 1. e4 e5 2. nc3 nf6. The score is +0.1 for white, and the opening is the Vienna Game: Falkbeer Variation. The FEN is displayed at the bottom."
+                }
             ],
             tools: [
                 java,
