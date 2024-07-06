@@ -53,9 +53,8 @@ const Project = ({ title, description, about, screenshots, widget, tools, github
     };
 
     return (
-        <div ref = {cardRef} className="bg-light rounded-xl shadow-lg m-10 p-10"
+        <div ref = {cardRef} className="bg-light rounded-xl shadow-lg m-10 p-10 md:w-[35vw] w-auto"
              style={{
-                 width: '35vw',
                  boxShadow: '20px 20px #758694',
                  transition: 'transform 0.5s ease',
                  gridArea: 'auto',
@@ -131,7 +130,7 @@ const Projects = () => {
         },
         {   title: "The Watering Hole",
             about: "A social media application for posting pictures of animals.", 
-            description: "As my introduction to full stack app development, ",
+            description: "I worked on The Watering Hole in a team of four with the UVic Peacock Club as our client for SENG 321: Requirements Engineering. This project involved requirements gathering, prioritization, and implementation. I was responsible for implementing the Flask backend, MySQL database, and the Flutter-backend integration. While the frontend needed more polish, I was proud of the functionality we achieved given the time constraints.",
             tools: [
                 flutter,
                 dart,
@@ -144,7 +143,7 @@ const Projects = () => {
         },
         {   title: "Can't See Chess",
             about: "A Discord bot for playing blind chess, storing ratings, analyzing games, and visually interacting with finished games.", 
-            description: "I've always been fascinated by those who can play chess without seeing a board in front of them. By creating a Discord bot that knows the rules of chess, can visually represent the board post-game, can analyze your game, and can store your rating, I was able to bring the blindfolded chess experience to Discord.",
+            description: "I've always been fascinated by those who can play chess without seeing a board in front of them. By creating a Discord bot that knows the rules of chess, can visually represent the board post-game, can analyze your game, and can store your rating, I was able to bring the blindfolded chess experience to Discord. Developing this bot improved my desire for creating a clean user experience.",
             screenshots: [
                 "/screenshots/cantseechess1.png",
             ],
@@ -169,8 +168,8 @@ const Projects = () => {
 
     const gameDev = [
         {   title: "Banana Slip",
-            about: "A 3D platformer game with a hint of nostalgia, developed using Godot 4.", 
-            description: "My most recent game jam, Banana Slip, is my personal favourite game development project. This was my first in-person jam, and lasted two days. Working in a team of five, I learned the level of quality and polish that can be achieved by working with amazing people in such a short time frame. We created a full three-level game with timed progression and a working, hosted leaderboard. This project is ongoing development, with plans to release on Steam.",
+            about: "A 3D speedrunning platformer game with a hint of nostalgia.", 
+            description: "My most recent game jam, Banana Slip, is my personal favourite game development project. This was my first in-person jam, and lasted two days. Working in a team of five, I learned the level of quality and polish that can be achieved by working with amazing people in such a short time frame. We created a full three-level game with timed progression and a working hosted leaderboard. This project is ongoing development, with plans to release on Steam.",
             widget: <iframe  className="rounded-xl shadow-xl" src="https://itch.io/embed/2499721" width="208" height="167"><a href="https://christianbookout.itch.io/banana-slip">Banana Slip by christianbookout, Sikowny</a></iframe>,
             tools: [
                 godot,
@@ -202,7 +201,7 @@ const Projects = () => {
         },
         {   title: "Dungeon Detox",
             about: "A 2D/3D hybrid game about keeping your dungeon clean.",
-            description: "",
+            description: "Dungeon Detox was my first game jam with a team (thus using version control). With this in mind, we ran into many issues with Plastic SCM, Unity's old version control system. However, we were able to power through these issues and create a fun experience. I came out of this project with an appreciation for playtesting and iteration, as many aspects of the game were unintuitive to new players.",
             widget: <iframe className="rounded-xl shadow-xl" src="https://itch.io/embed/2247847" width="208" height="167"><a href="https://christianbookout.itch.io/dungeon-detox">Dungeon Detox by christianbookout, DisguisedGrandpa</a></iframe>,
             tools: [
                 unity,
@@ -228,13 +227,13 @@ const Projects = () => {
             <header className="bg-dark bg-dark p-4 shadow-lg"/>
             <h1 className="text-6xl font-bold pt-20 text-light flex justify-center"
             style={{'textShadow': '5px 5px #758694'}} id="software-dev">Software Dev</h1>
-            <div className="flex justify-around p-10" style={{ maxWidth: '100vw' }}>
+            <div className="flex md:flex-row flex-col justify-center md:items-stretch items-center p-10" style={{ maxWidth: '100vw' }}>
                 <Column projects={softwareDev.filter((_, index) => index % 2 === 0)} />
                 <Column projects={softwareDev.filter((_, index) => index % 2 === 1)} />
             </div>
             <h1 className="text-6xl font-bold pt-20 text-light flex justify-center"
                 style={{'textShadow': '5px 5px #758694', id: 'software-dev'}}>Game Dev</h1>
-            <div className="flex justify-around p-10" style={{ maxWidth: '100vw' }}>
+            <div className="flex md:flex-row flex-col justify-center md:items-stretch items-center" style={{ maxWidth: '100vw' }}>
                     <Column projects={gameDev.filter((_, index) => index % 2 === 0)} />
                     <Column projects={gameDev.filter((_, index) => index % 2 === 1)} />
             </div>
