@@ -53,7 +53,7 @@ const Project = ({ title, description, about, screenshots, widget, tools, github
     };
 
     return (
-        <div ref = {cardRef} className="bg-light rounded-xl shadow-lg m-10 p-10 md:w-[35vw] w-auto"
+        <div ref = {cardRef} className="bg-light rounded-xl shadow-lg m-10 p-10 md:w-[35vw] w-[70vw]"
              style={{
                  boxShadow: '20px 20px #758694',
                  transition: 'transform 0.5s ease',
