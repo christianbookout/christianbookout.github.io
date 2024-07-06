@@ -233,7 +233,7 @@ const Projects = () => {
             </div>
             <h1 className="text-6xl font-bold pt-20 text-light flex justify-center"
                 style={{'textShadow': '5px 5px #758694', id: 'software-dev'}}>Game Dev</h1>
-            <div className="flex md:flex-row flex-col justify-center md:items-stretch items-center" style={{ maxWidth: '100vw' }}>
+            <div className="flex md:flex-row flex-col justify-center md:items-stretch items-center p-10" style={{ maxWidth: '100vw' }}>
                     <Column projects={gameDev.filter((_, index) => index % 2 === 0)} />
                     <Column projects={gameDev.filter((_, index) => index % 2 === 1)} />
             </div>
