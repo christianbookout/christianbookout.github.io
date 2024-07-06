@@ -19,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +45,7 @@
     "fittext": "^1.0.1",
     "gh-pages": "^6.1.1",
     "postcss": "^8.4.39",
+    "prettier": "^3.3.2",
     "react-slick": "^0.30.2",
     "tailwindcss": "^3.4.4"
   }
