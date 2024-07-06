@@ -1,21 +1,24 @@
 import React, { useState, useRef } from 'react';
-const java = "/svgs/tools/java.svg";
-const rust = "/svgs/tools/rust.svg";
-const opengl = "/svgs/tools/opengl.svg";
-const flutter = "/svgs/tools/flutter.svg";
-const dart = "/svgs/tools/dart.svg";
-const python = "/svgs/tools/python.svg";
-const flask = "/svgs/tools/flask.svg";
-const haskell = "/svgs/tools/haskell.svg";
-const maven = "/svgs/tools/maven.svg";
-const godot = "/svgs/tools/godot.svg";
-const blender = "/svgs/tools/blender.svg";
-const audacity = "/svgs/tools/audacity.svg";
-const unity = "/svgs/tools/unity.svg";
-const procreate = "/svgs/tools/procreate.svg";
-const aseprite = "/svgs/tools/aseprite.svg";
-const csharp = "/svgs/tools/csharp.svg";
-const mysql = "/svgs/tools/mysql.svg";
+const java = {
+    content: "/svgs/tools/java.svg",
+    title: "Java"
+};
+const rust = { content: "/svgs/tools/rust.svg", title: "Rust" };
+const opengl = { content: "/svgs/tools/opengl.svg", title: "OpenGL" };
+const flutter = { content: "/svgs/tools/flutter.svg", title: "Flutter" };
+const dart = { content: "/svgs/tools/dart.svg", title: "Dart" };
+const python = { content: "/svgs/tools/python.svg", title: "Python" };
+const flask = { content: "/svgs/tools/flask.svg", title: "Flask" };
+const haskell = { content: "/svgs/tools/haskell.svg", title: "Haskell" };
+const maven = { content: "/svgs/tools/maven.svg", title: "Maven" };
+const godot = { content: "/svgs/tools/godot.svg", title: "Godot" };
+const blender = { content: "/svgs/tools/blender.svg", title: "Blender" };
+const audacity = { content: "/svgs/tools/audacity.svg", title: "Audacity" };
+const unity = { content: "/svgs/tools/unity.svg", title: "Unity" };
+const procreate = { content: "/svgs/tools/procreate.svg", title: "Procreate" };
+const aseprite = { content: "/svgs/tools/aseprite.svg", title: "Aseprite" };
+const csharp = { content: "/svgs/tools/csharp.svg", title: "C#" };
+const mysql = {content: "/svgs/tools/mysql.svg", title: "MySQL"};
 
 const Project = ({ title, description, about, screenshots, widget, tools, githubUrl}) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -73,12 +76,12 @@ const Project = ({ title, description, about, screenshots, widget, tools, github
             <h2 className="text-center text-2xl font-bold mb-2 break-words">{title}</h2>
             <div className="flex justify-center gap-2 mb-2">
                 {tools?.map((tool, index) => (
-                    <img key={index} src={tool} alt={`${tool} icon`} className="w-8 h-8 rounded-full overflow-hidden drop-shadow-lg bg-light" />
+                    <img key={index} src={tool.content} title={tool.title} alt={`${tool.title} SVG icon`} className="w-8 h-8 rounded-full overflow-hidden drop-shadow-lg bg-light" />
                 ))}
             </div>
             <p className="text-dark text-center text-base mb-2 font-bold">{about}</p>
             <div ref={descriptionRef} style={{ maxHeight: '0', overflow: 'hidden', transition: 'max-height 0.5s ease-in-out' }}>
-                <div className="p-5 rounded-xl" style={{'box-shadow': 'inset 0 4px 6px -1px rgb(0 0 0 / 0.1)'}}>
+                <div className="p-5 rounded-xl" style={{boxShadow: 'inset 0 4px 6px -1px rgb(0 0 0 / 0.1)'}}>
                 {description}
                 </div>
             </div>
@@ -156,7 +159,7 @@ const Projects = () => {
                 flask,
                 mysql
             ],
-            widget: <div className="rounded-xl shadow-xl"><iframe className="rounded-xl shadow-xl" src="https://drive.google.com/file/d/1cukv0qmRoNZ2XMyCB1G1QqzbzaIx5Nht/preview"></iframe></div>,
+            widget: <div className="rounded-xl shadow-xl"><iframe className="rounded-xl shadow-xl" src="https://www.youtube.com/embed/px1kI4JNQcg" title="The Watering Hole Demo" allowFullScreen="true"></iframe></div>,
             githubUrl: "https://github.com/christianbookout/the-watering-hole"
         },
         {   title: "Can't See Chess",
@@ -191,7 +194,7 @@ const Projects = () => {
         {   title: "Banana Slip",
             about: "A 3D speedrunning platformer game with a hint of nostalgia.", 
             description: "My most recent game jam, Banana Slip, is my personal favourite game development project. This was my first in-person jam, and lasted two days. Working in a team of five, I learned the level of quality and polish that can be achieved by working with amazing people in such a short time frame. We created a full three-level game with timed progression and a working hosted leaderboard. This project is ongoing development, with plans to release on Steam.",
-            widget: <iframe  className="rounded-xl shadow-xl" src="https://itch.io/embed/2499721" width="208" height="167"><a href="https://christianbookout.itch.io/banana-slip">Banana Slip by christianbookout, Sikowny</a></iframe>,
+            widget: <iframe title="Banana Slip Itch Page" className="rounded-xl shadow-xl" src="https://itch.io/embed/2499721" width="208" height="167"><a href="https://christianbookout.itch.io/banana-slip">Banana Slip by christianbookout, Sikowny</a></iframe>,
             tools: [
                 godot,
                 blender,
@@ -202,7 +205,7 @@ const Projects = () => {
         {   title: "Slay Bells Ring",
             about: "A 3D atmospheric horror game about repairing Santa's sleigh. ",
             description: "Slay Bells Ring was my first experience with game development in a professional team, with specific roles and expectations. The result was my first fully completed game. Taking place over Christmas break, this game jam lasted a week. I learned a lot about the development of fun-yet-challenging AI, as well as the importance of audio and visual design.",
-            widget: <iframe className="rounded-xl shadow-xl" src="https://itch.io/embed/2432661" width="208" height="167"><a href="https://christianbookout.itch.io/slay-bells-ring">Slay Bells Ring by christianbookout, DisguisedGrandpa, Kibblez, Frigid</a></iframe>,
+            widget: <iframe title="Slay Bells Ring Itch Page" className="rounded-xl shadow-xl" src="https://itch.io/embed/2432661" width="208" height="167"><a href="https://christianbookout.itch.io/slay-bells-ring">Slay Bells Ring by christianbookout, DisguisedGrandpa, Kibblez, Frigid</a></iframe>,
             tools: [
                 unity,
                 csharp
@@ -212,7 +215,7 @@ const Projects = () => {
         {   title: "Solitoad",
             about: "An ambient 2D game about a frog using insects for entertainment.",
             description: "As a solo project and my first game jam, Solitoad was a fantastic experience which helped me fall in love with game development. I learned the crunch of game jams, and the necessity for rapid prototyping and iteration.",
-            widget: <iframe className="rounded-xl shadow-xl" src="https://itch.io/embed/2113985?border_width=0" width="208" height="167"><a href="https://christianbookout.itch.io/solitoad">Solitoad by christianbookout</a></iframe>,
+            widget: <iframe title="Solitoad Itch Page" className="rounded-xl shadow-xl" src="https://itch.io/embed/2113985?border_width=0" width="208" height="167"><a href="https://christianbookout.itch.io/solitoad">Solitoad by christianbookout</a></iframe>,
             tools: [
                 unity,
                 csharp,
@@ -223,7 +226,7 @@ const Projects = () => {
         {   title: "Dungeon Detox",
             about: "A 2D/3D hybrid game about keeping your dungeon clean.",
             description: "Dungeon Detox was my first game jam with a team (thus using version control). With this in mind, we ran into many issues with Plastic SCM, Unity's old version control system. However, we were able to power through these issues and create a fun experience. I came out of this project with an appreciation for playtesting and iteration, as many aspects of the game were unintuitive to new players.",
-            widget: <iframe className="rounded-xl shadow-xl" src="https://itch.io/embed/2247847" width="208" height="167"><a href="https://christianbookout.itch.io/dungeon-detox">Dungeon Detox by christianbookout, DisguisedGrandpa</a></iframe>,
+            widget: <iframe title="Dungeon Detox Itch Page" className="rounded-xl shadow-xl" src="https://itch.io/embed/2247847" width="208" height="167"><a href="https://christianbookout.itch.io/dungeon-detox">Dungeon Detox by christianbookout, DisguisedGrandpa</a></iframe>,
             tools: [
                 unity,
                 csharp,
@@ -234,7 +237,7 @@ const Projects = () => {
         {   title: "Corn Gobblin",
             about: "A 2D platformer game about a goblin fighting squirrels for corn.",
             description: "As an introduction to Godot, 2D animation, and audio design, Corn Gobblin was an excellent learning experience. I worked in a team of five for a three-day game jam, most of which I spent scribbling down character designs and animations. I worked as a mentor for the team, as all of the other members but one were completely new to game development.",
-            widget: <iframe className="rounded-xl shadow-xl" src="https://itch.io/embed/2459577" width="208" height="167"><a href="https://christianbookout.itch.io/corn-gobblin">Corn Gobblin by christianbookout, goolent`, intrnlerr, Clial</a></iframe>,
+            widget: <iframe title="Corn Gobblin Itch Page" className="rounded-xl shadow-xl" src="https://itch.io/embed/2459577" width="208" height="167"><a href="https://christianbookout.itch.io/corn-gobblin">Corn Gobblin by christianbookout, goolent`, intrnlerr, Clial</a></iframe>,
             tools: [
                 godot,
                 procreate,
