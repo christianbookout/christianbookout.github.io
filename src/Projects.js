@@ -19,6 +19,9 @@ const procreate = { content: "/svgs/tools/procreate.svg", title: "Procreate" };
 const aseprite = { content: "/svgs/tools/aseprite.svg", title: "Aseprite" };
 const csharp = { content: "/svgs/tools/csharp.svg", title: "C#" };
 const mysql = { content: "/svgs/tools/mysql.svg", title: "MySQL" };
+const postgresql = { content: "/svgs/tools/postgresql.svg", title: "PostgreSQL" };
+const fastapi = { content: "/svgs/tools/fastapi.svg", title: "FastAPI" };
+const tensorflow = { content: "/svgs/tools/tensorflow.svg", title: "TensorFlow" };
 
 const Project = ({
   title,
@@ -162,6 +165,19 @@ const Project = ({
 
 const Projects = () => {
   const softwareDev = [
+    {
+      title: "TensorFlow Recommender",
+      about: "A recommendation system for a UVic marketplace application.",
+      description: "As my first major machine learning project, I am building the TensorFlow Recommender for my Software Engineering Capstone, SENG 499, in a team of two. By applying concepts I learned in SENG 474: Data Mining, I was able to develop a working content-based recommendation system based on listing clicks and user searches. With ongoing development, this project will soon contain a collaborative filtering system, as well as many optimizations.",
+      screenshots: [
+        {
+          content: "/screenshots/recommender.webp",
+          alt: "A visual example of multiple listings being recommended on a \"For You\" type page. Each listing is related to chocolate in some way. The listings are displayed in a grid, with each having a price, seller name, listed date, and a button to say you're not interested.",
+        },
+      ],
+      tools: [python, tensorflow, postgresql, fastapi],
+      githubUrl: "https://github.com/UVicMartletplace/martletplace/tree/master/apps/algorithm/recommend",
+    },
     {
       title: "Spiderweb Simulator",
       about:
